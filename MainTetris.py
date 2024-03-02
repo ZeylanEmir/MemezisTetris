@@ -2,6 +2,8 @@ import pygame
 import sys
 from game import Game
 from colors import Colors
+import random
+
 
 pygame.init()
 
@@ -13,6 +15,9 @@ game_over_surface = title_font.render("GAME OVER", True, Colors.white)
 
 score_rect = pygame.Rect(320, 55, 170, 60)
 next_rect = pygame.Rect(320, 215, 170, 180)
+
+gif_list = ["E:\PythonLearning\MemezisTetris\MemezisTetris\Gifs\mellstroy.gif"]
+
 
 screen = pygame.display.set_mode((500, 620))
 pygame.display.set_caption("Memezis Tetris")
@@ -46,6 +51,11 @@ while True:
         if event.type == GAME_UPDATE and game.game_over == False:
             game.move_down()
 
+        if event.type == GAME_UPDATE and game.game_over == False:
+            game.move_down()
+
+
+
     # Drawning
     score_value_surface = title_font.render(str(game.score), True, Colors.white)
 
@@ -53,8 +63,10 @@ while True:
     screen.blit(score_surface, (365, 20, 50, 50))
     screen.blit(next_surface, (375, 180, 50, 50))
 
+
     if game.game_over == True:
         screen.blit(game_over_surface, (320, 450, 50, 50))
+
 
     pygame.draw.rect(screen, Colors.light_blue, score_rect, 0, 10)
     screen.blit(score_value_surface, score_value_surface.get_rect(centerx = score_rect.centerx,

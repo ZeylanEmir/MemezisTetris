@@ -11,10 +11,11 @@ class Game:
         self.next_block = self.get_random_block()
         self.game_over = False
         self.score = 0
-        self.rotate_sound = pygame.mixer.Sound("Sounds/rotate.ogg")
-        self.clear_sound = pygame.mixer.Sound("Sounds/clear.ogg")
+        self.rotate_sound = pygame.mixer.Sound("Sounds/lego-breaking.mp3")
+        self.clear_sound = pygame.mixer.Sound("Sounds/trim_trim_online-audio-converter (1).mp3")
+        self.game_over_sound = pygame.mixer.Sound("Sounds/vstavai-shan-tsung.mp3")
 
-        pygame.mixer.music.load('Sounds/music.ogg')
+        pygame.mixer.music.load('Sounds/03. A-Type Music (Korobeiniki).mp3')
         pygame.mixer.music.play(-1)
 
     def update_score(self, lines_cleared, move_down_points):
@@ -25,6 +26,7 @@ class Game:
         elif lines_cleared == 3:
             self.score += 500
         self.score += move_down_points
+
 
     def get_random_block(self):
         if len(self.blocks) == 0:
@@ -62,6 +64,9 @@ class Game:
             self.update_score(rows_cleared, 0)
         if self.block_fits() == False:
             self.game_over = True
+            self.game_over_sound.play()
+            pygame.mixer.music.stop()
+            pygame.mixer.music.play()
 
     def reset(self):
         self.grid.reset()
